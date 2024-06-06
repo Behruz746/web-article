@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ValidationError } from "../components";
 import { Input } from "../ui";
 import { SammiLogo } from "../constans";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,6 +41,7 @@ function Register() {
         <form onSubmit={registerHandler}>
           <SammiLogo width={50} height={50} />
           <h1 className="h3 mb-3 fw-normal">Please register</h1>
+          <ValidationError />
           <Input
             label={"User name"}
             elId={"floatingName"}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ValidationError } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { SammiLogo } from "../constans";
 import { Input } from "../ui";
@@ -32,6 +33,7 @@ function Login() {
         <form onSubmit={loginHandler}>
           <SammiLogo width={50} height={50} />
           <h1 className="h3 mb-3 fw-normal">Please login</h1>
+          <ValidationError />
           <Input
             label={"Email address"}
             elId={"floatingInput"}
