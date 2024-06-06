@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { Input } from "../ui";
 import { SammiLogo } from "../constans";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  registerUserFailure,
-  registerUserStart,
-  registerUserSuccess,
-} from "../slice/auth";
+import { signUserStart, signUserSuccess, signUserFailure } from "../slice/auth";
 import authService from "../service/auth";
 
 function Register() {
@@ -18,8 +14,8 @@ function Register() {
 
   const registerHandler = async (e) => {
     e.preventDefault();
-    dispatch(registerUserStart()); // loading...
-
+    dispatch(signUserStart()); // loading...
+    // user data
     const user = {
       username: name,
       email,
@@ -28,12 +24,13 @@ function Register() {
 
     try {
       const response = await authService.useRegister(user);
-      console.log(user);
       // console.log(response);
+      // console.log(user);
       // console.log(response.data.user.token);
-      dispatch(registerUserSuccess()); // register
+      dispatch(signUserSuccess(response.user)); // register
     } catch (error) {
-      dispatch(registerUserFailure(error)); // error
+      // console.log(error.response.data.errors);
+      dispatch(signUserFailure(error.response.data.errors)); // error
     }
   };
 

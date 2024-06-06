@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SammiLogo } from "../constans";
 import { Input } from "../ui";
-import { loginUserStart } from "../slice/auth";
+import { signUserStart, signUserSuccess, signUserFailure } from "../slice/auth";
+import authService from "../service/auth";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -10,9 +11,19 @@ function Login() {
   const dispatch = useDispatch(); // redux dan functionlar olish uchun
   const { isLoad } = useSelector((state) => state.auth); // reduxdan malumotlar olish uchun
 
-  const loginHandler = (e) => {
+  const loginHandler = async (e) => {
     e.preventDefault();
-    dispatch(loginUserStart());
+    dispatch(signUserStart());
+    const user = { email, password };
+
+    try {
+      const response = await authService.useLogin(user);
+      // console.log(response);
+      // console.log(user);
+      dispatch(signUserSuccess(response.user));
+    } catch (error) {
+      dispatch(signUserFailure(error.response.data.errors));
+    }
   };
 
   return (

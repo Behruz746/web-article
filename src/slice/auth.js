@@ -12,33 +12,21 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    // Login
-    loginUserStart: (state) => {
-      state.isLoad = true;
-    },
-    loginUserSuccess: (state) => {},
-    loginUserFailure: (state) => {},
-    // Register
-    registerUserStart: (state) => {
+    signUserStart: (state) => {
       state.isLoad = true; // loading bolishi
     },
-    registerUserSuccess: (state) => {
+    signUserSuccess: (state, action) => {
       state.loggedIn = true; // user login bolishi
       state.isLoad = false; // loading remove bolishi
+      state.user = action.payload;
     },
-    registerUserFailure: (state) => {
+    signUserFailure: (state, action) => {
       state.isLoad = false; // loading remove bolishi
-      state.error = "error"; // error bolgandagi malumot
+      state.error = action.payload; // error bolgandagi malumot
     },
   },
 });
 
-export const {
-  loginUserStart,
-  loginUserSuccess,
-  loginUserFailure,
-  registerUserStart,
-  registerUserSuccess,
-  registerUserFailure,
-} = authSlice.actions; // functionlar export bolishi
+export const { signUserStart, signUserSuccess, signUserFailure } =
+  authSlice.actions; // functionlar export bolishi
 export default authSlice.reducer;
