@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Input({ label, elId, type = "text", state, setState }) {
   return (
@@ -11,7 +11,7 @@ function Input({ label, elId, type = "text", state, setState }) {
         value={state}
         onChange={(e) => setState(e.target.value)}
       />
-      <label for="floatingInput">{label}</label>
+      <label htmlFor="floatingInput">{label}</label>
     </div>
   );
 }

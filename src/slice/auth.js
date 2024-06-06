@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// userlarni malumotlari
+// userlarni default malumotlari
 const initialState = {
   isLoad: false,
   loggedIn: false,
+  error: null,
   user: null,
 };
 
@@ -19,10 +20,16 @@ export const authSlice = createSlice({
     loginUserFailure: (state) => {},
     // Register
     registerUserStart: (state) => {
-      state.isLoad = true;
+      state.isLoad = true; // loading bolishi
     },
-    registerUserSuccess: (state) => {},
-    registerUserFailure: (state) => {},
+    registerUserSuccess: (state) => {
+      state.loggedIn = true; // user login bolishi
+      state.isLoad = false; // loading remove bolishi
+    },
+    registerUserFailure: (state) => {
+      state.isLoad = false; // loading remove bolishi
+      state.error = "error"; // error bolgandagi malumot
+    },
   },
 });
 
@@ -31,5 +38,7 @@ export const {
   loginUserSuccess,
   loginUserFailure,
   registerUserStart,
-} = authSlice.actions;
+  registerUserSuccess,
+  registerUserFailure,
+} = authSlice.actions; // functionlar export bolishi
 export default authSlice.reducer;
