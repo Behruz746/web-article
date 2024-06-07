@@ -11,8 +11,6 @@ function ValidationError() {
     });
   }, [error]);
 
-  console.log(error !== null && errorMessage());
-
   return (
     error !== null &&
     errorMessage()?.map((item, idx) => (

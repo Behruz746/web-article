@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setItem } from "../helpers/persistence-storage";
 
 // userlarni default malumotlari
 const initialState = {
@@ -19,6 +20,7 @@ export const authSlice = createSlice({
       state.loggedIn = true; // user login bolishi
       state.isLoad = false; // loading remove bolishi
       state.user = action.payload;
+      setItem("token", action.payload.token);
     },
     signUserFailure: (state, action) => {
       state.isLoad = false; // loading remove bolishi
