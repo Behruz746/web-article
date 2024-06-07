@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ValidationError } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { SammiLogo } from "../constans";
 import { Input } from "../ui";
 import { signUserStart, signUserSuccess, signUserFailure } from "../slice/auth";
 import authService from "../service/auth";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch(); // redux dan functionlar olish uchun
-  const { isLoad } = useSelector((state) => state.auth); // reduxdan malumotlar olish uchun
+  const { isLoad, loggedIn } = useSelector((state) => state.auth); // reduxdan malumotlar olish uchun
+  const navigate = useNavigate();
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -22,10 +24,18 @@ function Login() {
       // console.log(response);
       // console.log(user);
       dispatch(signUserSuccess(response.user));
+      navigate("/"); // userni home pagega yo'naltirish
     } catch (error) {
       dispatch(signUserFailure(error.response.data.errors));
     }
   };
+
+  // agar user login bolgan bolsa login pagelarga kira olmaydi
+  useEffect(() => {
+    if (loggedIn) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div className="container text-center">

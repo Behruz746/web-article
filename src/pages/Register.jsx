@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ValidationError } from "../components";
 import { Input } from "../ui";
 import { SammiLogo } from "../constans";
 import { useDispatch, useSelector } from "react-redux";
 import { signUserStart, signUserSuccess, signUserFailure } from "../slice/auth";
 import authService from "../service/auth";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { isLoad } = useSelector((state) => state.auth);
+  const { isLoad, loggedIn } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const registerHandler = async (e) => {
     e.preventDefault();
@@ -29,11 +31,19 @@ function Register() {
       // console.log(user);
       // console.log(response.data.user.token);
       dispatch(signUserSuccess(response.user)); // register
+      navigate("/"); // userni home pagega yo'naltirish
     } catch (error) {
       // console.log(error.response.data.errors);
       dispatch(signUserFailure(error.response.data.errors)); // error
     }
   };
+
+  // agar user login bolgan bolsa login pagelarga kira olmaydi
+  useEffect(() => {
+    if (loggedIn) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div className="container text-center">
