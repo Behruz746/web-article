@@ -43,7 +43,7 @@ function Register() {
     if (loggedIn) {
       navigate("/");
     }
-  }, []);
+  }, [loggedIn]);
 
   return (
     <div className="container text-center">

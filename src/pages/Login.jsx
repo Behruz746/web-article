@@ -21,8 +21,6 @@ function Login() {
 
     try {
       const response = await authService.useLogin(user);
-      // console.log(response);
-      // console.log(user);
       dispatch(signUserSuccess(response.user));
       navigate("/"); // userni home pagega yo'naltirish
     } catch (error) {
@@ -35,7 +33,7 @@ function Login() {
     if (loggedIn) {
       navigate("/");
     }
-  }, []);
+  }, [loggedIn]);
 
   return (
     <div className="container text-center">

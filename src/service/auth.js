@@ -13,7 +13,8 @@ const authService = {
   },
   // user malumotlarini olish
   async getUser() {
-    // const response = await axios.get("/user");
+    const { data } = await axios.get(`/user`);
+    return data;
   },
 };
 
