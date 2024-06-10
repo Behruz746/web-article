@@ -19,25 +19,22 @@ function Card({ title, description, author }) {
         <div className="card-body">
           <p className="card-text fw-bold">{title}</p>
           <p className="card-text">{description}</p>
-          <div className="d-flex justify-content-between align-items-center">
-            <div className="btn-group">
-              <button type="button" className="btn btn-sm btn-outline-success">
-                View
-              </button>
-              <button
-                type="button"
-                className="btn btn-sm btn-outline-secondary"
-              >
-                Edit
-              </button>
-              <button type="button" className="btn btn-sm btn-outline-danger">
-                Delete
-              </button>
-            </div>
-            <small className="text-body-secondary fw-bold text-capitalize">
-              {author?.username}
-            </small>
+        </div>
+        <div className="card-footer d-flex justify-content-between align-items-center">
+          <div className="btn-group">
+            <button type="button" className="btn btn-sm btn-outline-success">
+              View
+            </button>
+            <button type="button" className="btn btn-sm btn-outline-secondary">
+              Edit
+            </button>
+            <button type="button" className="btn btn-sm btn-outline-danger">
+              Delete
+            </button>
           </div>
+          <small className="text-body-secondary fw-bold text-capitalize">
+            {author?.username}
+          </small>
         </div>
       </div>
     </div>
