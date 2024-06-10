@@ -1,10 +1,20 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { SammiLogo } from "../constans";
-import { useSelector } from "react-redux";
+import { logOut } from "../slice/auth";
+import { removeItem } from "../helpers/persistence-storage";
+import { useDispatch, useSelector } from "react-redux";
 
 function Navbar() {
   const { loggedIn, user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    dispatch(logOut());
+    removeItem("token");
+    navigate("/login");
+  };
 
   return (
     <div className="container">
@@ -22,7 +32,12 @@ function Navbar() {
           {loggedIn ? (
             <>
               <p className="m-0">{user.username}</p>
-              <button className="btn btn-outline-danger">Logout</button>
+              <button
+                className="btn btn-outline-danger"
+                onClick={logoutHandler}
+              >
+                Logout
+              </button>
             </>
           ) : (
             <>

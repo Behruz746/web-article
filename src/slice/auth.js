@@ -26,9 +26,15 @@ export const authSlice = createSlice({
       state.isLoad = false; // loading remove bolishi
       state.error = action.payload; // error bolgandagi malumot
     },
+    logOut: (state) => {
+      state.isLoad = false;
+      state.loggedIn = false;
+      state.error = null;
+      state.user = null;
+    },
   },
 });
 
-export const { signUserStart, signUserSuccess, signUserFailure } =
+export const { signUserStart, signUserSuccess, signUserFailure, logOut } =
   authSlice.actions; // functionlar export bolishi
 export default authSlice.reducer;

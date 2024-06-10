@@ -1,4 +1,4 @@
-const setItem = (key, data, userKey, userData) => {
+const setItem = (key, data) => {
   try {
     localStorage.setItem(key, data);
   } catch (error) {
@@ -13,4 +13,13 @@ const getItem = (key) => {
     console.log("Error saving data");
   }
 };
-export { setItem, getItem };
+
+const removeItem = (key) => {
+  try {
+    localStorage.removeItem(key);
+  } catch (error) {
+    console.log("Error saving data");
+  }
+};
+
+export { setItem, getItem, removeItem };
