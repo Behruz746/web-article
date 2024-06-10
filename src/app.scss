@@ -7,8 +7,36 @@
   text-decoration: none;
 }
 
+.container {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 15px;
+  margin: 0 auto;
+}
+
+.header {
+  width: 100%;
+  &__logo {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.form__main {
+  margin-top: 50px !important;
+  max-width: 250px;
+  width: 100%;
+}
+
+.user-btn {
+  padding: 10px 20px;
+}
+
 .navigat__link {
-  padding: 6px 12px;
+  padding: 10px 20px;
   text-decoration: none;
   border: 1px solid rgb(22, 22, 178);
   border-radius: 8px;
@@ -26,5 +54,23 @@
   &:nth-child(2) {
     background-color: rgb(22, 22, 178);
     color: #fff;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header__logo {
+    width: 42px;
+    height: 42px;
+  }
+  .navigat__link {
+    padding: 8px 10px;
+  }
+  .user-btn {
+    padding: 8px 10px;
+  }
+  .form__main {
+    margin-top: 10% !important;
+    max-width: none;
+    width: 100%;
   }
 }

@@ -1,5 +1,6 @@
-const SammiLogo = ({width, height}) => (
+const SammiLogo = ({ width, height }) => (
   <svg
+    className="header__logo"
     width={width}
     height={height}
     viewBox="0 0 50 50"

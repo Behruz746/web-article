@@ -7,6 +7,7 @@ const initialState = {
   loggedIn: false,
   error: null,
   user: null,
+  articels: null,
 };
 
 export const authSlice = createSlice({
@@ -15,6 +16,9 @@ export const authSlice = createSlice({
   reducers: {
     signUserStart: (state) => {
       state.isLoad = true; // loading bolishi
+    },
+    addArticels: (state, action) => {
+      state.articels = action.payload;
     },
     signUserSuccess: (state, action) => {
       state.loggedIn = true; // user login bolishi
@@ -35,6 +39,11 @@ export const authSlice = createSlice({
   },
 });
 
-export const { signUserStart, signUserSuccess, signUserFailure, logOut } =
-  authSlice.actions; // functionlar export bolishi
+export const {
+  addArticels,
+  signUserStart,
+  signUserSuccess,
+  signUserFailure,
+  logOut,
+} = authSlice.actions; // functionlar export bolishi
 export default authSlice.reducer;

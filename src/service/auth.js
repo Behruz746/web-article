@@ -11,9 +11,9 @@ const authService = {
     const { data } = await axios.post("/users/login", { user });
     return data;
   },
-  // user malumotlarini olish
-  async getUser() {
-    const { data } = await axios.get(`/user`);
+  // bu function dinamik: har hil malumotlarini olish
+  async getData(path) {
+    const { data } = await axios.get(`/${path}`);
     return data;
   },
 };

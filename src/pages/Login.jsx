@@ -37,7 +37,7 @@ function Login() {
 
   return (
     <div className="container text-center">
-      <main className="form-signin w-25 m-auto">
+      <main className="form-signin m-auto form__main">
         <form onSubmit={loginHandler}>
           <SammiLogo width={50} height={50} />
           <h1 className="h3 mb-3 fw-normal">Please login</h1>

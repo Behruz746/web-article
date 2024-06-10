@@ -17,8 +17,8 @@ function Navbar() {
   };
 
   return (
-    <div className="container">
-      <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <header className="header">
+      <div className="container">
         <div className="col-md-3 mb-2 mb-md-0">
           <NavLink
             to="/"
@@ -31,9 +31,11 @@ function Navbar() {
         <div className="col-md-3 d-flex align-items-center gap-2 w-auto text-end">
           {loggedIn ? (
             <>
-              <p className="m-0">{user.username}</p>
+              <button className="btn btn-outline-success user-btn">
+                {user.username}
+              </button>
               <button
-                className="btn btn-outline-danger"
+                className="btn btn-outline-danger user-btn"
                 onClick={logoutHandler}
               >
                 Logout
@@ -50,8 +52,8 @@ function Navbar() {
             </>
           )}
         </div>
-      </header>
-    </div>
+      </div>
+    </header>
   );
 }
 
