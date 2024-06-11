@@ -5,6 +5,7 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
+  // outline: 1px solid #d00;
 }
 
 .container {
@@ -19,6 +20,12 @@
 
 .header {
   width: 100%;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: #fff;
   &__logo {
     width: 50px;
     height: 50px;
@@ -54,24 +61,6 @@
   &:nth-child(2) {
     background-color: rgb(22, 22, 178);
     color: #fff;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .header__logo {
-    width: 42px;
-    height: 42px;
-  }
-  .navigat__link {
-    padding: 8px 10px;
-  }
-  .user-btn {
-    padding: 8px 10px;
-  }
-  .form__main {
-    margin-top: 10% !important;
-    max-width: none;
-    width: 100%;
   }
 }
 
@@ -174,5 +163,41 @@
   }
   100% {
     transform: scaleY(-1) rotate(-135deg);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    .container {
+      padding: 10px 8px;
+    }
+    &__logo {
+      width: 42px;
+      height: 42px;
+    }
+  }
+
+  .navigat__link {
+    padding: 8px 10px;
+  }
+  .user-btn {
+    padding: 8px 10px;
+  }
+  .form__main {
+    margin-top: 10% !important;
+    max-width: none;
+    width: 100%;
+  }
+  .home {
+    .container {
+      padding: 0;
+    }
+  }
+  .card {
+    border-radius: 0;
+
+    svg {
+      border-radius: 0;
+    }
   }
 }

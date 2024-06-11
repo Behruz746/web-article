@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./layout/RootLayout";
-import { Home, Login, Register } from "./pages";
+import { Home, Login, Register, ArticleDetail } from "./pages";
 import "./app.scss";
-import authService from "./service/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem } from "./helpers/persistence-storage";
 import { signUserFailure, signUserSuccess } from "./slice/auth";
@@ -12,6 +11,7 @@ import {
   getArticlesSuccess,
   getArticlesFailure,
 } from "./slice/articel";
+import userData from "./service/data";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,17 +19,17 @@ function App() {
 
   const getUser = async () => {
     try {
-      const { user } = await authService.getData("user");
+      const { user } = await userData.getData("user");
       dispatch(signUserSuccess(user));
     } catch (error) {
-      dispatch(signUserFailure(error.response.data.errors));
+      dispatch(signUserFailure(error));
     }
   };
 
   const getArticles = async () => {
     dispatch(getArticlesStart());
     try {
-      const { articles } = await authService.getData("articles");
+      const { articles } = await userData.getData("articles");
       dispatch(getArticlesSuccess(articles));
     } catch (error) {
       console.log(error);
@@ -40,7 +40,6 @@ function App() {
   useEffect(() => {
     const token = getItem("token");
     if (token) getUser();
-
     getArticles();
   }, [loggedIn]);
 
@@ -53,6 +52,7 @@ function App() {
         { index: true, element: <Home /> },
         { path: "/login", element: <Login /> },
         { path: "/register", element: <Register /> },
+        { path: "/article/:id", element: <ArticleDetail /> }, // dinamik page
       ],
     },
   ]);

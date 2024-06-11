@@ -7,16 +7,18 @@ import { Loader } from "../ui";
 function Home() {
   const { isLoad, articles } = useSelector((state) => state.article);
   return (
-    <div className="container">
-      {isLoad ? (
-        <Loader />
-      ) : (
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          {articles.map((item) => (
-            <Card {...item} key={uuidv4()} />
-          ))}
-        </div>
-      )}
+    <div className="home">
+      <div className="container">
+        {isLoad ? (
+          <Loader />
+        ) : (
+          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {articles.map((item) => (
+              <Card {...item} key={uuidv4()} />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
