@@ -8,8 +8,8 @@ function Input({ label, elId, type = "text", state, setState }) {
         className="form-control"
         id={elId}
         placeholder={label}
-        value={state}
         onChange={(e) => setState(e.target.value)}
+        value={state}
       />
       <label htmlFor="floatingInput">{label}</label>
     </div>

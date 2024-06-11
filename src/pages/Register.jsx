@@ -27,9 +27,6 @@ function Register() {
 
     try {
       const response = await authService.useRegister(user);
-      // console.log(response);
-      // console.log(user);
-      // console.log(response.data.user.token);
       dispatch(signUserSuccess(response.user)); // register
       navigate("/"); // userni home pagega yo'naltirish
     } catch (error) {

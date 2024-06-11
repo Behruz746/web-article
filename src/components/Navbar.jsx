@@ -31,6 +31,12 @@ function Navbar() {
         <div className="col-md-3 d-flex align-items-center gap-2 w-auto text-end">
           {loggedIn ? (
             <>
+              <button
+                className="btn btn-outline-success user-btn"
+                onClick={() => navigate("/create-article")}
+              >
+                Create
+              </button>
               <button className="btn btn-outline-success user-btn">
                 {user.username}
               </button>
