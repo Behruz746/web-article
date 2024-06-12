@@ -11,15 +11,15 @@ import {
 import moment from "moment";
 
 function Article() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const { articleDetail, isLoad } = useSelector((state) => state.article);
   const dispatch = useDispatch();
- 
+
   useEffect(() => {
     const getArticle = async () => {
       dispatch(getArticleDetailStart());
       try {
-        const { article } = await userData.getData(`articles/${id}`);
+        const { article } = await userData.getData(`articles/${slug}`);
         dispatch(getArticleDetailSuccess(article));
       } catch (error) {
         dispatch(getArticleDetailFailure(error));
@@ -27,7 +27,7 @@ function Article() {
     };
 
     getArticle();
-  }, [id]);
+  }, [slug]);
 
   return isLoad ? (
     <Loader />

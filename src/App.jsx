@@ -1,7 +1,14 @@
 import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./layout/RootLayout";
-import { Home, Login, Register, ArticleDetail, CreateArticle } from "./pages";
+import {
+  Home,
+  Login,
+  Register,
+  ArticleDetail,
+  CreateArticle,
+  EditeArticle,
+} from "./pages";
 import "./app.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem } from "./helpers/persistence-storage";
@@ -35,8 +42,9 @@ function App() {
         { index: true, element: <Home /> },
         { path: "/login", element: <Login /> },
         { path: "/register", element: <Register /> },
-        { path: "/article/:id", element: <ArticleDetail /> }, // dinamik page
+        { path: "/article/:slug", element: <ArticleDetail /> }, // dinamik page
         { path: "/create-article", element: <CreateArticle /> },
+        { path: "/edite-article/:slug", element: <EditeArticle /> },
       ],
     },
   ]);

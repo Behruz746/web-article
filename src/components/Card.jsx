@@ -49,6 +49,7 @@ function Card({ title, description, author, slug, getArticles }) {
                 <button
                   type="button"
                   className="btn btn-sm btn-outline-secondary"
+                  onClick={() => navigate(`/edite-article/${slug}`)}
                 >
                   Edit
                 </button>

@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from "uuid";
 import { Card } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../ui";
-import ArticleService from "../service/article";
 import userData from "../service/data";
 import {
   getArticlesStart,
