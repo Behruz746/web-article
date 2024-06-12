@@ -6,6 +6,10 @@ const ArticleService = {
     const { data } = await axios.post(`/${path}`, { article });
     return data;
   },
+
+  async deleteArticle(slug) {
+    await axios.delete(`/articles/${slug}`);
+  },
 };
 
 export default ArticleService;

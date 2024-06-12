@@ -1,8 +1,20 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import ArticleService from "../service/article";
+import { useSelector } from "react-redux";
 
-function Card({ title, description, author, slug }) {
+function Card({ title, description, author, slug, getArticles }) {
   const navigate = useNavigate();
+  const { loggedIn, user } = useSelector((state) => state.auth);
+
+  const deleteArticelHandler = async () => {
+    try {
+      ArticleService.deleteArticle(slug);
+      getArticles();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="col" title={title}>
@@ -32,12 +44,23 @@ function Card({ title, description, author, slug }) {
             >
               View
             </button>
-            <button type="button" className="btn btn-sm btn-outline-secondary">
-              Edit
-            </button>
-            <button type="button" className="btn btn-sm btn-outline-danger">
-              Delete
-            </button>
+            {loggedIn && author.username === user?.username ? (
+              <>
+                <button
+                  type="button"
+                  className="btn btn-sm btn-outline-secondary"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-sm btn-outline-danger"
+                  onClick={deleteArticelHandler}
+                >
+                  Delete
+                </button>
+              </>
+            ) : null}
           </div>
           <small className="text-body-secondary fw-bold text-capitalize">
             {author?.username}
