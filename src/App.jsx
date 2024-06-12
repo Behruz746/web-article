@@ -18,7 +18,7 @@ import userData from "./service/data";
 
 function App() {
   const dispatch = useDispatch();
-  const { loggedIn, user } = useSelector((state) => state.auth);
+  const { loggedIn } = useSelector((state) => state.auth);
 
   const getUser = async () => {
     try {
@@ -32,7 +32,7 @@ function App() {
   useEffect(() => {
     const token = getItem("token");
     if (token) getUser();
-  }, [loggedIn, user]);
+  }, [loggedIn]);
 
   const routers = createBrowserRouter([
     {

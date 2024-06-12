@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import userData from "../service/data";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../ui";
@@ -8,6 +8,7 @@ import {
   editeUserProfileFailure,
   editeUserProfileStart,
   editeUserProfileSuccess,
+  signUserSuccess,
   logOut,
 } from "../slice/auth";
 import { removeItem } from "../helpers/persistence-storage";
@@ -25,6 +26,15 @@ function UserProfile() {
     navigate("/login");
   };
 
+  const getUser = async () => {
+    try {
+      const { user } = await userData.getData("user");
+      dispatch(signUserSuccess(user));
+    } catch (error) {
+      dispatch(signUserFailure(error));
+    }
+  };
+
   const formSubmit = async (e) => {
     e.preventDefault();
     dispatch(editeUserProfileStart());
@@ -33,6 +43,7 @@ function UserProfile() {
       await userData.editeUserProfile("user", newProfile);
       dispatch(editeUserProfileSuccess());
       navigate(`/profile/${name}`);
+      getUser();
     } catch (error) {
       console.log(error);
       dispatch(editeUserProfileFailure());
