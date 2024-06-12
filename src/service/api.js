@@ -1,20 +1,27 @@
 import axios from "axios";
 import { getItem } from "../helpers/persistence-storage";
 
-axios.defaults.baseURL = import.meta.env.VITE_PUBLIC_API_URL; // .env
-// user malumotlarini tokin bilan olish uchun
-axios.interceptors.request.use(
-  (config) => {
-    // localstore dan tokenni olish
-    const token = getItem("token");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`; // Agar "Token" bo'lsa, "Bearer" o'rniga "Token" ni ishlating
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+axios.defaults.baseURL = "http://localhost:3000/api";
+axios.interceptors.request.use((config) => {
+  const token = getItem("token");
+  const authorization = token ? `Token ${token}` : `Bearer ${token}`;
+  config.headers.Authorization = authorization;
+  return config;
+});
+
+// axios.interceptors.request.use(
+//   (config) => {
+//     const token = getItem("token");
+//     if (token) {
+//       config.headers.Authorization = `Token ${token}`; // yoki `Bearer ${token}`
+//     }
+//     config.headers["Content-Type"] = "application/json"; // Muayyan kontent-tipi qo'shish
+//     console.log(config);
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
 
 export default axios;

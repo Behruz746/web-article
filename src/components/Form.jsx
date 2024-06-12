@@ -1,17 +1,21 @@
 import React from "react";
 import { Input, TextArea } from "../ui";
+import { useSelector } from "react-redux";
 
-function CreateForm({
+function Form({
   title,
   setTitle,
   description,
   setDescription,
   body,
   setBody,
+  formSubmit,
 }) {
+  const { isLoad } = useSelector((state) => state.article);
+
   return (
     <div className="w-75 mx-auto">
-      <form action="#">
+      <form action="#" onSubmit={formSubmit}>
         <Input
           label={"Title"}
           elId={"input-title"}
@@ -31,12 +35,16 @@ function CreateForm({
           setState={setBody}
           height={"300px"}
         />
-        <button type="submit" className="btn btn-primary w-100 py-2 mt-2">
-          Create
+        <button
+          type="submit"
+          className="btn btn-primary w-100 py-2 mt-2"
+          disabled={isLoad}
+        >
+          {isLoad ? "Loading..." : "Create"}
         </button>
       </form>
     </div>
   );
 }
 
-export default CreateForm;
+export default Form;

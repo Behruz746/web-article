@@ -11,6 +11,7 @@ export const articelsSlice = createSlice({
   name: "article",
   initialState,
   reducers: {
+    // GET articles
     getArticlesStart: (state) => {
       state.isLoad = true;
     },
@@ -21,8 +22,8 @@ export const articelsSlice = createSlice({
     getArticlesFailure: (state, action) => {
       state.isLoad = false;
       state.error = action.payload;
-      console.log("error");
     },
+    // GET article detail
     getArticleDetailStart: (state) => {
       state.isLoad = true;
     },
@@ -35,6 +36,17 @@ export const articelsSlice = createSlice({
       state.error = action.payload;
       console.log("error");
     },
+    // POST article
+    postArticleStart: (state) => {
+      state.isLoad = true;
+    },
+    postArticleSuccess: (state) => {
+      state.isLoad = false;
+    },
+    postArticleFailure: (state, action) => {
+      state.isLoad = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -45,5 +57,8 @@ export const {
   getArticleDetailStart,
   getArticleDetailSuccess,
   getArticleDetailFailure,
+  postArticleStart,
+  postArticleSuccess,
+  postArticleFailure,
 } = articelsSlice.actions;
 export default articelsSlice.reducer;

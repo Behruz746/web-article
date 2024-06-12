@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Card } from "../components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../ui";
+import userData from "../service/data";
+import {
+  getArticlesStart,
+  getArticlesSuccess,
+  getArticlesFailure,
+} from "../slice/articel";
 
 function Home() {
+  const dispatch = useDispatch();
   const { isLoad, articles } = useSelector((state) => state.article);
+
+  const getArticles = async () => {
+    dispatch(getArticlesStart());
+    try {
+      const { articles } = await userData.getData("articles");
+      dispatch(getArticlesSuccess(articles));
+    } catch (error) {
+      console.log(error);
+      dispatch(getArticlesFailure(error));
+    }
+  };
+
+  useEffect(() => {
+    getArticles();
+  }, []);
+
   return (
     <div className="home">
       <div className="container">

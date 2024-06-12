@@ -14,7 +14,7 @@ function Article() {
   const { id } = useParams();
   const { articleDetail, isLoad } = useSelector((state) => state.article);
   const dispatch = useDispatch();
-
+ 
   useEffect(() => {
     const getArticle = async () => {
       dispatch(getArticleDetailStart());
