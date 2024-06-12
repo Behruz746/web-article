@@ -8,6 +8,7 @@ import {
   ArticleDetail,
   CreateArticle,
   EditeArticle,
+  UserProfile,
 } from "./pages";
 import "./app.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +18,7 @@ import userData from "./service/data";
 
 function App() {
   const dispatch = useDispatch();
-  const { loggedIn } = useSelector((state) => state.auth);
+  const { loggedIn, user } = useSelector((state) => state.auth);
 
   const getUser = async () => {
     try {
@@ -31,7 +32,7 @@ function App() {
   useEffect(() => {
     const token = getItem("token");
     if (token) getUser();
-  }, [loggedIn]);
+  }, [loggedIn, user]);
 
   const routers = createBrowserRouter([
     {
@@ -45,6 +46,7 @@ function App() {
         { path: "/article/:slug", element: <ArticleDetail /> }, // dinamik page
         { path: "/create-article", element: <CreateArticle /> },
         { path: "/edite-article/:slug", element: <EditeArticle /> },
+        { path: "/profile/:name", element: <UserProfile /> },
       ],
     },
   ]);

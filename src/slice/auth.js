@@ -4,6 +4,7 @@ import { setItem } from "../helpers/persistence-storage";
 // userlarni default malumotlari
 const initialState = {
   isLoad: false,
+  editeLoad: false,
   loggedIn: false,
   error: null,
   user: null,
@@ -14,6 +15,17 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    // Edite user profile
+    editeUserProfileStart: (state) => {
+      state.editeLoad = true; // loading bolishi
+    },
+    editeUserProfileSuccess: (state) => {
+      state.editeLoad = false; // loading remove bolishi
+    },
+    editeUserProfileFailure: (state, action) => {
+      state.editeLoad = false; // loading remove bolishi
+      state.error = action.payload; // error bolgandagi malumot
+    },
     signUserStart: (state) => {
       state.isLoad = true; // loading bolishi
     },
@@ -45,5 +57,8 @@ export const {
   signUserSuccess,
   signUserFailure,
   logOut,
+  editeUserProfileStart,
+  editeUserProfileFailure,
+  editeUserProfileSuccess,
 } = authSlice.actions; // functionlar export bolishi
 export default authSlice.reducer;

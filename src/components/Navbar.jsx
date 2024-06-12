@@ -37,14 +37,17 @@ function Navbar() {
               >
                 Create
               </button>
-              <button className="btn btn-outline-success user-btn">
-                {user.username}
-              </button>
               <button
                 className="btn btn-outline-danger user-btn"
                 onClick={logoutHandler}
               >
                 Logout
+              </button>
+              <button
+                className="profile-btn"
+                onClick={() => navigate(`/profile/${user.username}`)}
+              >
+                <h3>{user.username.slice(0, 1)}</h3>
               </button>
             </>
           ) : (
