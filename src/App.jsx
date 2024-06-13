@@ -1,5 +1,9 @@
 import React, { useEffect } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useNavigate,
+} from "react-router-dom";
 import RootLayout from "./layout/RootLayout";
 import {
   Home,
@@ -15,6 +19,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { getItem } from "./helpers/persistence-storage";
 import { signUserFailure, signUserSuccess } from "./slice/auth";
 import userData from "./service/data";
+
+const NoutFound = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="error__container">
+      <h1>Not Found 404</h1>
+      <button
+        type="button"
+        className="btn btn-primary py-2"
+        onClick={() => navigate("/")}
+      >
+        home page
+      </button>
+    </div>
+  );
+};
 
 function App() {
   const dispatch = useDispatch();
@@ -38,7 +59,7 @@ function App() {
     {
       path: "/",
       element: <RootLayout />,
-      errorElement: <h1>Error</h1>,
+      errorElement: <NoutFound />,
       children: [
         { index: true, element: <Home /> },
         { path: "/login", element: <Login /> },

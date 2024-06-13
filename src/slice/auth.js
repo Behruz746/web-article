@@ -6,6 +6,7 @@ const initialState = {
   isLoad: false,
   editeLoad: false,
   loggedIn: false,
+  editeError: null,
   error: null,
   user: null,
   articels: null,
@@ -24,7 +25,7 @@ export const authSlice = createSlice({
     },
     editeUserProfileFailure: (state, action) => {
       state.editeLoad = false; // loading remove bolishi
-      state.error = action.payload; // error bolgandagi malumot
+      state.editeError = action.payload; // error bolgandagi malumot
     },
     signUserStart: (state) => {
       state.isLoad = true; // loading bolishi

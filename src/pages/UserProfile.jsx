@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import userData from "../service/data";
 import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../ui";
 import { Input } from "../ui";
 import { useNavigate } from "react-router-dom";
+import { ValidationEditeError } from "../components";
 import {
   editeUserProfileFailure,
   editeUserProfileStart,
@@ -44,9 +45,10 @@ function UserProfile() {
       dispatch(editeUserProfileSuccess());
       navigate(`/profile/${name}`);
       getUser();
+      setName("");
+      setBio("");
     } catch (error) {
-      console.log(error);
-      dispatch(editeUserProfileFailure());
+      dispatch(editeUserProfileFailure(error.response.data.errors));
     }
   };
 
@@ -74,6 +76,7 @@ function UserProfile() {
               <p>bio: {user.bio ? user.bio : "none"}</p>
 
               <form action="#" onSubmit={formSubmit}>
+                <ValidationEditeError />
                 <Input
                   label={"Name"}
                   elId={"user-name"}
